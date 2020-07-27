@@ -22,7 +22,7 @@ app.set('view engine','ejs')
 app.get('/', function(req, res){
   res.render('login');
 });//启动任务首次加载选择的路径
-app.post('/login',function (req,res) {
+app.post('/index',function (req,res) {
   let qq=req.body.qq;
   req.session.oker=qq;
   res.render('index',{
