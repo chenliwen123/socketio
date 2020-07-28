@@ -20,7 +20,13 @@ app.use(boydparser.urlencoded({
 app.set('view engine','ejs')
 
 app.get('/', function(req, res){
-  res.render('login');
+  if(req.session.oker){
+    res.render('index',{
+      qq:req.session.oker,
+    })
+  }else{
+    res.render('login')
+  }
 });//启动任务首次加载选择的路径
 app.post('/index',function (req,res) {
   let qq=req.body.qq;
@@ -28,6 +34,15 @@ app.post('/index',function (req,res) {
   res.render('index',{
     qq:req.session.oker,
   })
+})
+app.get('/index',function(req,res){
+  if(req.session.oker){
+    res.render('index',{
+      qq:req.session.oker,
+    })
+  }else{
+    res.render('login')
+  }
 })
 io.on('connection', function(socket){
   onlineUsers++;
