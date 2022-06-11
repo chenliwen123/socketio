@@ -1,3 +1,13 @@
+<!--
+ * @Author: 陈立文
+ * @Date: 2021-11-20 13:36:48
+ * @LastEditors: 陈立文
+ * @LastEditTime: 2022-05-24 14:04:03
+ * @FilePath: \socketio\views\index.ejs
+ * @Description: 
+ * 
+ * Copyright (c) 2022 by chenliwen_hand 1410762621@qq.com, All Rights Reserved. 
+-->
 <!doctype html>
 <html>
   <head>
@@ -19,7 +29,7 @@
       .chatwith{float:left;width: 640px;position:relative;height: 600px;}
       #left div{transition: left 5s linear;position:absolute;left:960px;top:0;white-space:nowrap;}
     </style>
-    <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+    <script src="https://cdn.socket.io/4.4.0/socket.io.js"></script>
     <script src="https://www.w3school.com.cn//jquery/jquery-1.11.1.min.js"></script>
   </head>
   <body>
@@ -56,7 +66,7 @@
     }
       $(function () {
         var num=0;
-        var socket = io();
+        var socket = io('ws://localhost:3000');
         $('form').submit(function(){
           if ($('#m').val()==''){
             return false;
@@ -78,7 +88,10 @@
           numfunction(num)
         });
         function numfunction(num) {
-          $('#'+num).css({left:-$('#'+num).width(),top:37*$('#'+num).siblings().length+'px'});
+          $('#'+num).css({
+            left:-$('#'+num).width(),
+            top:37*$('#'+num).siblings().length+'px'
+          });
           setTimeout(function () {
             $('#'+num).remove();
           },5000)
